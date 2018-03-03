@@ -5,6 +5,7 @@
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
   <ul class="nav navbar-nav navbar-right">
     <li><%= link_to 'Twitterでログイン', '/auth/twitter' %></li>
+    <li><%= link_to 'ログアウト', '/signout_twitter' %></li>
   </ul>
 </div>
 <div class="container">
@@ -15,3 +16,11 @@
   <% end %>
   <%= yield %>
 </div>
+
+<% @user.each do |user| %>
+  <%= user.nickname %>
+  <% @client.home_timeline.each do |timeline| %>
+    <%= timeline.text %><br>
+    <%= timeline.user.name %><br>
+  <% end %>
+<% end %>

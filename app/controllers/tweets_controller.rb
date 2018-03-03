@@ -1,10 +1,16 @@
 class TweetsController < ApplicationController
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
-
+  require 'twitter'
   # GET /tweets
   # GET /tweets.json
   def index
-    @tweets = Tweet.all
+    @client = Twitter::REST::Client.new do |config|
+      config.consumer_key        = '0a5MbNm2ipxxQfQFmNaTVIbh9'
+      config.consumer_secret     = 'K0cuyraZHbkwhQmSUlczlmhDU3FcldWlEpY3GL38jyhlTqiiE7'
+      config.access_token        = '3141302054-VLgmtMrrrYNCOZ3CbBjbKs6wrb1xtGurDnEulDU'
+      config.access_token_secret = 'zDlGJ383TE0nSo1TwphktaWQ9ox9XpJrc6J7kHdvnPw1C'
+    end
+    @user = User.all
   end
 
   def home
